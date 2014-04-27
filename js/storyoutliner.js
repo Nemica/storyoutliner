@@ -1,4 +1,7 @@
 var StoryOutliner = {
+
+	outline: {},
+	
 	newOutline: function(opts) {
 		localStorage.setItem('outline', JSON.stringify({
 			name: opts.name || '',
@@ -14,10 +17,10 @@ var StoryOutliner = {
 	},
 	
 	restoreContext: function() {
-		if((outline = localStorage.getItem('outline'))) {
-			outline = JSON.parse(outline);
-			console.log("Story outline for " + outline.name + " loaded.");
-			$('.outline-name').text(outline.name);
+		if((StoryOutliner.outline = localStorage.getItem('outline'))) {
+			StoryOutliner.outline = JSON.parse(StoryOutliner.outline);
+			console.log("Story outline for " + StoryOutliner.outline.name + " loaded.");
+			$('.outline-name').text(StoryOutliner.outline.name);
 			
 			StoryOutliner.showCharacterList();
 			
@@ -30,12 +33,12 @@ var StoryOutliner = {
 	editCharacter: function(index) {
 		var ch;
 		if(index == -1) {
-			index = outline.characters.length;
-			outline.characters.push({});
+			index = StoryOutliner.outline.characters.length;
+			StoryOutliner.outline.characters.push({});
 		}
-		ch = outline.characters[index];
+		ch = StoryOutliner.outline.characters[index];
 		
-		var dialog = UI.dialog({
+		UI.dialog({
 			title: typeof ch.name == "undefined" ? "New character" : "Edit character: " + ch.name,
 			content: [{
 				type: 'text',
@@ -53,16 +56,36 @@ var StoryOutliner = {
 			buttons: [{
 				text: 'OK',
 				clickHandler: function() {
-					outline.characters[index] = {
+					StoryOutliner.outline.characters[index] = {
 						name: $('#character-edit-name').val(),
 						notes: $('#character-edit-notes').val()
 					};
 					StoryOutliner.showCharacterList();
 					StoryOutliner.saveToStorage();
-					$('.dialog-mask').remove();
+					UI.closeDialog();
 				}
 			}, {
 				text: 'Cancel'				
+			}]
+		});
+	},
+	
+	deleteCharacter: function(index) {
+		ch = StoryOutliner.outline.characters[index];
+		
+		UI.dialog({
+			title: typeof ch.name == "undefined" ? "Delete character" : "Delete character: " + ch.name,
+			content: "Are you sure you want to delete " + (typeof ch.name == "undefined" ? "this character character" : ch.name) + "?",
+			buttons: [{
+				text: 'Yes',
+				clickHandler: function() {
+					StoryOutliner.outline.characters.splice(index, 1);
+					StoryOutliner.saveToStorage();
+					StoryOutliner.showCharacterList();
+					UI.closeDialog();
+				}
+			}, {
+				text: 'No'
 			}]
 		});
 	},
@@ -71,7 +94,7 @@ var StoryOutliner = {
 		var $charlist = $('.outline-characters .container');
 		$charlist.text('');
 		
-		outline.characters.forEach(function(ch, i) {
+		StoryOutliner.outline.characters.forEach(function(ch, i) {
 			var $charBlurb = $('<div/>').
 				addClass('outline-characters-element').
 				appendTo($charlist);
@@ -79,6 +102,7 @@ var StoryOutliner = {
 			var $xButton = $('<div/>').
 				addClass('button').
 				addClass('close').
+				attr('title', 'Delete').
 				click(function() {
 					StoryOutliner.deleteCharacter(i);
 				}).
@@ -88,6 +112,7 @@ var StoryOutliner = {
 				addClass('button').
 				addClass('button-pos-2').
 				addClass('edit').
+				attr('title', 'Edit').
 				click(function() {
 					StoryOutliner.editCharacter(i);
 				}).
@@ -104,6 +129,6 @@ var StoryOutliner = {
 	},
 	
 	saveToStorage: function() {
-		localStorage.setItem('outline', JSON.stringify(outline));
+		localStorage.setItem('outline', JSON.stringify(StoryOutliner.outline));
 	}
 };

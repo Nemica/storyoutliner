@@ -18,15 +18,15 @@ var UI = {
 		opts = opts || {};
 		
 		// Set default values
-		$.extend(true, opts, {
+		opts = $.extend(true, {
 			fitSize: true,
 			closeable: true,
 			draggable: true, // only for title bar
 			buttons: [{
 				text: 'OK'
 			}],
-			buttonAlign: 'right'
-		});
+			buttonAlign: 'center'
+		}, opts);
 		
 		var $mask = $('<div/>').
 			addClass('dialog-mask');
@@ -35,11 +35,6 @@ var UI = {
 			addClass('dialog').
 			appendTo($mask);
 			
-		// Debug?
-		$box.close = function() {
-			$mask.remove();
-		}
-		
 		var $innerBox = $('<div/>').
 			addClass('dialog-content').
 			appendTo($box);
@@ -59,7 +54,7 @@ var UI = {
 				$xButton = $('<div/>').
 					addClass('button').
 					addClass('close').
-					click($box.close).
+					click(UI.closeDialog).
 					appendTo($titleBar);
 			}
 		}
@@ -67,7 +62,9 @@ var UI = {
 		// Content creation
 		if(opts.content) {
 			if(typeof opts.content == "string") { // Content as string: Just add content.
-				$innerBox.text(opts.content);
+				$innerBox.
+					css({marginTop: 10, marginBottom: 15}).
+					text(opts.content);
 			} else { // Content as object: Generate elements
 				opts.content.forEach(function(el) {
 					console.log("Add " + el.type + " (#" + el.id + ") type element.");
@@ -124,7 +121,7 @@ var UI = {
 		opts.buttons.forEach(function(btn) {
 			var $btn = UI.button({
 				text: btn.text || 'OK',
-				clickHandler: btn.clickHandler || $box.close
+				clickHandler: btn.clickHandler || UI.closeDialog
 			});
 			$btn.appendTo($bottomBar);
 		});
@@ -148,5 +145,10 @@ var UI = {
 		$box.css(optsCss);
 		
 		return $box;
+	},
+	
+	// Closes any open dialog
+	closeDialog: function() {
+		$('.dialog-mask').remove();
 	}
 }
