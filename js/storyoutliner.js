@@ -68,18 +68,31 @@ var StoryOutliner = {
 	},
 	
 	showCharacterList: function() {
-		var $charlist = $('.outline-characters div');
+		var $charlist = $('.outline-characters .container');
 		$charlist.text('');
 		
 		outline.characters.forEach(function(ch, i) {
 			var $charBlurb = $('<div/>').
 				addClass('outline-characters-element').
-				addClass('clickable').
+				appendTo($charlist);
+
+			var $xButton = $('<div/>').
+				addClass('button').
+				addClass('close').
+				click(function() {
+					StoryOutliner.deleteCharacter(i);
+				}).
+				appendTo($charBlurb);
+				
+			var $editButton = $('<div/>').
+				addClass('button').
+				addClass('button-pos-2').
+				addClass('edit').
 				click(function() {
 					StoryOutliner.editCharacter(i);
 				}).
-				appendTo($charlist);
-			
+				appendTo($charBlurb);
+				
 			var $charName = $('<h3/>').
 				text(ch.name).
 				appendTo($charBlurb);

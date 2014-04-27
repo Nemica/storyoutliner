@@ -125,9 +125,9 @@ button, input[type=button] {
 	min-height: 14px;
 }
 
-.title-bar .button {
+.button {
 	background-image: url(../img/sprites.png);
-	background-position: -12px -12px;
+	background-position: 12px 12px;
 	background-repeat: no-repeat;
 	width: 12px;
 	height: 12px;
@@ -139,8 +139,20 @@ button, input[type=button] {
 	right: 2px;
 }
 
-.title-bar .button.close {
+.button-pos-2 {
+	right: 18px;
+}
+
+.button-pos-3 {
+	right: 34px;
+}
+
+.button.close {
 	background-position: 0 0;
+}
+
+.button.edit {
+	background-position: -12px 0;
 }
 
 .dialog .bottom-bar {
@@ -181,9 +193,11 @@ button, input[type=button] {
 }
 
 .outline-characters-element {
+	position: relative;
 	float: left;
-	width: 150px;
-	margin: 8px;
+	width: 22%;
+	min-width: 120px;
+	margin: 1%;
 	padding: 4px;
 	border: 1px solid #ccc;
 	-webkit-box-shadow: 6px 6px 5px 0 rgba(0, 0, 0, 0.75);
