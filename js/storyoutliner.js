@@ -48,10 +48,22 @@ var StoryOutliner = {
 				type: 'multitext',
 				label: 'Notes',
 				id: 'character-edit-notes'
+			}, {
+				type: 'select',
+				label: 'Role',
+				id: 'character-edit-role',
+				data: [{
+					text: 'Protagonist',
+					value: 0
+				}, {
+					text: 'Antagonist',
+					value: 1
+				}]
 			}],
 			data: {
 				'character-edit-name': ch.name,
-				'character-edit-notes': ch.notes
+				'character-edit-notes': ch.notes,
+				'character-edit-role': ch.role
 			},
 			buttons: [{
 				text: 'OK',

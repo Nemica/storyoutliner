@@ -88,6 +88,18 @@ var UI = {
 							break;
 						case 'multitext':
 							$mainElement = $('<textarea/>');
+							break;
+						case 'select':
+							$mainElement = $('<select/>');
+							if(el.data) {
+								el.data.forEach(function(set) {
+									var $opt = $('<option/>').
+										text(set.text).
+										attr('value', set.value).
+										appendTo($mainElement);
+								});
+							}
+							break;
 					}
 					
 					if(el.id) $mainElement.attr('id', el.id);

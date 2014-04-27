@@ -88,7 +88,7 @@ label {
 	width: 60px;
 }
 
-input[type=text], textarea {
+input[type=text], textarea, select {
 	font-size: 12px;
 	font-family: Tahoma, Verdana, sans-serif;
 	cursor: text;
@@ -101,8 +101,25 @@ input[type=text], textarea {
 	width: 150px;
 }
 
+[contenteditable=true] {
+	cursor: text;
+	-ms-user-select: text;
+	-webkit-user-select: text;
+	-moz-user-select: text;
+	user-select: text;
+	border: 1px solid #ccc;
+}
+
 textarea {
 	resize: none;
+}
+
+select {
+	cursor: default;
+	-ms-user-select: default;
+	-webkit-user-select: default;
+	-moz-user-select: default;
+	user-select: default;
 }
 
 button, input[type=button] {
