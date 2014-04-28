@@ -53,5 +53,9 @@ $(function() {
 		$('.maincontainer .loaded-visible').load('pages/characters.html', onComplete);
 	});
 	
+	$('#config').click(function() {
+		$('.maincontainer .loaded-visible').load('pages/config.html', onComplete);
+	});
+	
 	$('.maincontainer .loaded-visible').load('pages/dash.html', onComplete);
 });
