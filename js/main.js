@@ -22,6 +22,12 @@ $(function() {
 		}
 	};
 
+	var loadPage = function(name) {
+		// Set current page
+		localStorage.setItem('currentPage', name);
+		$('.maincontainer .loaded-visible').load('pages/' + name + '.html', onComplete);
+	}
+
 	// Click handlers for the topbar
 	$('#new-outline').click(function() {
 		UI.dialog({
@@ -50,12 +56,13 @@ $(function() {
 	});
 
 	$('#characters').click(function() {
-		$('.maincontainer .loaded-visible').load('pages/characters.html', onComplete);
+		loadPage('characters');
 	});
 	
 	$('#config').click(function() {
-		$('.maincontainer .loaded-visible').load('pages/config.html', onComplete);
+		loadPage('config');
 	});
 	
-	$('.maincontainer .loaded-visible').load('pages/dash.html', onComplete);
+	// Load page
+	loadPage(localStorage.getItem('currentPage') || 'dash');
 });
