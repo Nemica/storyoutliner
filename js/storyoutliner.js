@@ -19,6 +19,10 @@ var StoryOutliner = {
 	restoreContext: function() {
 		if((StoryOutliner.outline = localStorage.getItem('outline'))) {
 			StoryOutliner.outline = JSON.parse(StoryOutliner.outline);
+
+			// Generate arrays if not existing
+			StoryOutliner.outline.characters = StoryOutliner.outline.characters || [];
+			StoryOutliner.outline.snippets = StoryOutliner.outline.snippets || [];
 			console.log("Story outline for " + StoryOutliner.outline.name + " loaded.");
 			$('.outline-name').text(StoryOutliner.outline.name);
 			

@@ -3,18 +3,23 @@ $(function() {
 	var onComplete = function() {
 		StoryOutliner.restoreContext();
 		
+		// Dashboard page
+
+		$('.char-stats').text(StoryOutliner.outline.characters.length);
+		$('.snippet-stats').text(StoryOutliner.outline.snippets.length);
+		
 		$('.outline-summary').
 			click(function() {
 				$(this).attr('contenteditable', 'true');
 			}).
 			text(StoryOutliner.outline.summary);
 		
+		// Character page
+
 		$('.new-character').click(function() {
 			StoryOutliner.editCharacter(-1);
 		});
 		
-		$('.char-stats').text(StoryOutliner.outline.characters.length);
-		$('.snippet-stats').text(StoryOutliner.outline.snippets.length);
 	};
 
 	// Click handlers for the topbar
