@@ -1,25 +1,25 @@
 $(function() {
 
 	var onComplete = function() {
-		StoryOutliner.restoreContext();
+		if(StoryOutliner.restoreContext()) {
 		
-		// Dashboard page
+			// Dashboard page
 
-		$('.char-stats').text(StoryOutliner.outline.characters.length);
-		$('.snippet-stats').text(StoryOutliner.outline.snippets.length);
-		
-		$('.outline-summary').
-			click(function() {
-				$(this).attr('contenteditable', 'true');
-			}).
-			text(StoryOutliner.outline.summary);
-		
-		// Character page
+			$('.char-stats').text(StoryOutliner.outline.characters.length);
+			$('.snippet-stats').text(StoryOutliner.outline.snippets.length);
 
-		$('.new-character').click(function() {
-			StoryOutliner.editCharacter(-1);
-		});
-		
+			$('.outline-summary').
+				click(function() {
+					$(this).attr('contenteditable', 'true');
+				}).
+				text(StoryOutliner.outline.summary);
+			
+			// Character page
+
+			$('.new-character').click(function() {
+				StoryOutliner.editCharacter(-1);
+			});
+		}
 	};
 
 	// Click handlers for the topbar
@@ -49,5 +49,5 @@ $(function() {
 		});
 	});
 	
-	$('.maincontainer .loaded-visible').load('pages/dash.html', {}, onComplete);
+	$('.maincontainer .loaded-visible').load('pages/dash.html', onComplete);
 });

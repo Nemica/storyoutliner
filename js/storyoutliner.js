@@ -29,8 +29,10 @@ var StoryOutliner = {
 			StoryOutliner.showCharacterList();
 			
 			$('body').removeClass('not-loaded').addClass('loaded');
+			return true;
 		} else {
 			console.log("No story outline loaded.");
+			return false;
 		}
 	},
 	
