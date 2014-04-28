@@ -48,6 +48,10 @@ $(function() {
 			}]
 		});
 	});
+
+	$('#characters').click(function() {
+		$('.maincontainer .loaded-visible').load('pages/characters.html', onComplete);
+	});
 	
 	$('.maincontainer .loaded-visible').load('pages/dash.html', onComplete);
 });
