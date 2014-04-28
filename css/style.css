@@ -219,4 +219,12 @@ button, input[type=button] {
 	-webkit-box-shadow: 6px 6px 5px 0 rgba(0, 0, 0, 0.75);
 	-moz-box-shadow: 6px 6px 5px 0 rgba(0, 0, 0, 0.105);
 	box-shadow: 6px 6px 5px 0 rgba(0, 0, 0, 0.75);
+	z-index: 0;
 }
+
+.character-color-theme {
+	height: 100%;
+	position: absolute;
+	width: 10px;
+	z-index: -1;
+}	
