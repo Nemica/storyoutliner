@@ -17,6 +17,7 @@ var StoryOutliner = {
 	},
 	
 	restoreContext: function() {
+		StoryOutliner.config = JSON.parse(localStorage.getItem('config'));
 		if((StoryOutliner.outline = localStorage.getItem('outline'))) {
 			StoryOutliner.outline = JSON.parse(StoryOutliner.outline);
 
@@ -137,6 +138,24 @@ var StoryOutliner = {
 			var $charNotes = $('<p/>').
 				text(ch.notes).
 				appendTo($charBlurb);
+
+			if(ch.role > -1) {
+				var col = StoryOutliner.config.characterRoles[ch.role];
+
+				col = col.substr(1); // Remove leading #
+				var rgb = {
+					r: parseInt(col.substr(0,2), 16),
+					g: parseInt(col.substr(2,2), 16),
+					b: parseInt(col.substr(4,2), 16)
+				};
+
+				col = new Color(rgb.r, rgb.g, rgb.b);
+
+				var lighter = col.shiftBrightness(75);
+
+				$charBlurb.css({borderColor: col.hex(), backgroundColor: lighter.hex()})
+
+			}
 		});
 	},
 
@@ -193,5 +212,6 @@ var StoryOutliner = {
 
 	saveToStorage: function() {
 		localStorage.setItem('outline', JSON.stringify(StoryOutliner.outline));
+		localStorage.setItem('config', JSON.stringify(StoryOutliner.config));
 	}
 };
