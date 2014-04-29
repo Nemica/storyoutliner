@@ -19,6 +19,12 @@ $(function() {
 			$('.new-character').click(function() {
 				StoryOutliner.editCharacter(-1);
 			});
+
+			// Config page
+
+			$('.new-character-role').click(function() {
+				StoryOutliner.editCharacterRole(-1);
+			});
 		}
 	};
 

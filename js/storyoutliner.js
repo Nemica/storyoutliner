@@ -58,13 +58,7 @@ var StoryOutliner = {
 				type: 'select',
 				label: 'Role',
 				id: 'character-edit-role',
-				data: [{
-					text: 'Protagonist',
-					value: 0
-				}, {
-					text: 'Antagonist',
-					value: 1
-				}]
+				data: StoryOutliner.config.characterRoles
 			}],
 			data: {
 				'character-edit-name': ch.name,
@@ -145,7 +139,58 @@ var StoryOutliner = {
 				appendTo($charBlurb);
 		});
 	},
+
+	editCharacterRole: function(index) {
+		var ch;
+		if(index == -1) {
+			index = StoryOutliner.config.characterRoles.length;
+			StoryOutliner.outline.characterRoles.push({});
+		}
+		ch = StoryOutliner.outline.characterRoles[index];
+		
+		UI.dialog({
+			title: typeof ch.name == "undefined" ? "New character role" : "Edit character role: " + ch.name,
+			content: [{
+				type: 'text',
+				label: 'Name',
+				id: 'character-role-edit-name'
+			}, {
+				type: 'text',
+				label: 'Plural',
+				id: 'character-role-edit-plural'
+			}, {
+				type: 'color',
+				label: 'Color',
+				id: 'character-role-color'
+			}],
+			data: {
+				'character-role-edit-name': ch.name,
+				'character-role-edit-plural': ch.plural,
+				'character-role-edit-color': ch.color
+			},
+			buttons: [{
+				text: 'OK',
+				clickHandler: function() {
+					StoryOutliner.config.charactersRoles[index] = {
+						name: $('#character-role-edit-name').val(),
+						plural: $('#character-role-edit-plural').val(),
+						color: $('#character-role-edit-color').val()
+					};
+					StoryOutliner.showCharacterRoleList();
+					StoryOutliner.saveToStorage();
+					UI.closeDialog();
+				}
+			}, {
+				text: 'Cancel'				
+			}]
+		});
+	},
 	
+	showCharacterRoleList: function() {
+		var $rolelist = $('.config-character-roles .container');
+		$rolelist.text('');
+	},
+
 	saveToStorage: function() {
 		localStorage.setItem('outline', JSON.stringify(StoryOutliner.outline));
 	}
