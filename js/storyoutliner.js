@@ -163,9 +163,9 @@ var StoryOutliner = {
 		var ch;
 		if(index == -1) {
 			index = StoryOutliner.config.characterRoles.length;
-			StoryOutliner.outline.characterRoles.push({});
+			StoryOutliner.config.characterRoles.push({});
 		}
-		ch = StoryOutliner.outline.characterRoles[index];
+		ch = StoryOutliner.config.characterRoles[index];
 		
 		UI.dialog({
 			title: typeof ch.name == "undefined" ? "New character role" : "Edit character role: " + ch.name,
