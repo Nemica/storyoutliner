@@ -101,7 +101,7 @@ input[type=text], textarea, select {
 	width: 150px;
 }
 
-input[type=text], textarea, select {
+input[type=text].with-preview, textarea.with-preview, select.with-preview {
 	width: 128px;
 }
 
