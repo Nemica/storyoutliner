@@ -180,6 +180,7 @@ var StoryOutliner = {
 			}, {
 				type: 'color',
 				label: 'Color',
+				preview: true,
 				id: 'character-role-color'
 			}],
 			data: {
@@ -200,7 +201,7 @@ var StoryOutliner = {
 					UI.closeDialog();
 				}
 			}, {
-				text: 'Cancel'				
+				text: 'Cancel'
 			}]
 		});
 	},

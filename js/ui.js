@@ -100,9 +100,33 @@ var UI = {
 								});
 							}
 							break;
+						case 'color':
+							$mainElement = $('<div/>');
+							$input = $('<input/>').
+								attr('type', 'text').
+								appendTo($mainElement);
+							if(el.id) {
+								$input.attr('id', el.id); // Needs to be added here because it's not the main element
+							}
+							if(el.preview) {
+								$input.addClass('with-preview');
+								var $preview = $('<div/>').
+									addClass('color-preview').
+									appendTo($mainElement);
+								if(el.id) {
+									$preview.attr('id', el.id + '-preview');
+								}
+								$input.change(function() {
+									$preview.css({backgroundColor: $preview.val()});
+								});
+							}
+							break;
+						default:
+							$mainElement = $('<div/>');
+							break;
 					}
 					
-					if(el.id) $mainElement.attr('id', el.id);
+					if(el.id && !$('#' + el.id).length) $mainElement.attr('id', el.id);
 					
 					$mainElement.appendTo($el);
 					$el.appendTo($innerBox);
