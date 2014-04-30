@@ -58,6 +58,7 @@ var StoryOutliner = {
 			}, {
 				type: 'select',
 				label: 'Role',
+				labelField: 'name',
 				id: 'character-edit-role',
 				data: StoryOutliner.config.characterRoles
 			}],
@@ -191,7 +192,7 @@ var StoryOutliner = {
 			buttons: [{
 				text: 'OK',
 				clickHandler: function() {
-					StoryOutliner.config.charactersRoles[index] = {
+					StoryOutliner.config.characterRoles[index] = {
 						name: $('#character-role-edit-name').val(),
 						plural: $('#character-role-edit-plural').val(),
 						color: $('#character-role-edit-color').val()

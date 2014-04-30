@@ -94,7 +94,7 @@ var UI = {
 							if(el.data) {
 								el.data.forEach(function(set) {
 									var $opt = $('<option/>').
-										text(set.text).
+										text(set[set.labelField]).
 										attr('value', set.value).
 										appendTo($mainElement);
 								});
