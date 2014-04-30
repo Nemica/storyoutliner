@@ -101,7 +101,8 @@ var UI = {
 							}
 							break;
 						case 'color':
-							$mainElement = $('<div/>');
+							$mainElement = $('<div/>').
+								addClass('color-container');
 							$input = $('<input/>').
 								attr('type', 'text').
 								appendTo($mainElement);
@@ -112,12 +113,21 @@ var UI = {
 								$input.addClass('with-preview');
 								var $preview = $('<div/>').
 									addClass('color-preview').
+									css({backgroundColor: '#ccc'}).
 									appendTo($mainElement);
 								if(el.id) {
 									$preview.attr('id', el.id + '-preview');
 								}
-								$input.change(function() {
-									$preview.css({backgroundColor: $preview.val()});
+								var oldBackground = "#CCC";
+								$input.keyup(function() {
+									console.log("Update preview.");
+									try {
+										var check = new Color($input.val());
+									} catch(e) {
+										var check = new Color(oldBackground);
+									}
+									$preview.css({backgroundColor: check.hex()});
+									oldBackground = check.hex();
 								});
 							}
 							break;

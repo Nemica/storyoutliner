@@ -235,9 +235,13 @@ button, input[type=button] {
 
 .color-preview {
 	border: 1px solid #ccc;
-	display: inline;
+	display: inline-block;
 	width: 10px;
 	height: 10px;
 	margin-left: 5px;
 	margin-top: 1px;
+}
+
+.color-container {
+	display: inline-block;
 }
