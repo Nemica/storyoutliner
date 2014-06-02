@@ -32,7 +32,11 @@ $(function() {
 		// Set current page
 		localStorage.setItem('currentPage', name);
 		$('.maincontainer .loaded-visible').load('pages/' + name + '.html', onComplete);
-	}
+	};
+
+	$('#dashboard').click(function() {
+		loadPage('dash');
+	});
 
 	// Click handlers for the topbar
 	$('#new-outline').click(function() {
