@@ -82,6 +82,10 @@ var UI = {
 					var $mainElement;
 					
 					switch(el.type) {
+						case 'label':
+							$mainElement = $('<div/>').
+								html(el.data ? el.data : '');
+							break;
 						case 'text':
 							$mainElement = $('<input/>').
 								attr('type', 'text');
@@ -149,7 +153,7 @@ var UI = {
 			Object.keys(opts.data).forEach(function(property) {
 				var $el = $box.find('#' + property);
 				if($el.length) {
-					if($el.prop('tagName') == 'INPUT') {
+					if($el.prop('tagName') == 'INPUT' || $el.prop('tagName') == 'TEXTAREA') {
 						$el.val(opts.data[property]);
 					} else {
 						$el.text(opts.data[property]);
