@@ -88,7 +88,14 @@ label {
 	width: 60px;
 }
 
-input[type=text], textarea, select {
+button {
+	background-color: #eee;
+	border: 3px double #ccc;
+	font-size: 10px;
+	font-weight: bold;
+}
+
+.dialog input[type=text], textarea, select {
 	font-size: 12px;
 	font-family: Tahoma, Verdana, sans-serif;
 	cursor: text;
@@ -101,11 +108,11 @@ input[type=text], textarea, select {
 	width: 150px;
 }
 
-textarea {
+.dialog textarea {
 	height: 80px;
 }
 
-input[type=text].with-preview, textarea.with-preview, select.with-preview {
+.dialog input[type=text].with-preview, .dialog textarea.with-preview, .dialog select.with-preview {
 	width: 128px;
 }
 
@@ -130,7 +137,7 @@ select {
 	user-select: default;
 }
 
-button, input[type=button] {
+.dialog button, .dialog input[type=button] {
 	margin-left: 4px;
 	padding: 0 1px;
 	background-color: #eee;
@@ -178,6 +185,11 @@ button, input[type=button] {
 
 .button.edit {
 	background-position: -12px 0;
+}
+
+.with-button {
+	position: relative;
+	padding-right: 18px;
 }
 
 .dialog .bottom-bar {

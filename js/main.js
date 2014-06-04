@@ -31,11 +31,19 @@ $(function() {
 	var loadPage = function(name) {
 		// Set current page
 		localStorage.setItem('currentPage', name);
-		$('.maincontainer .loaded-visible').load('pages/' + name + '.html', onComplete);
+		if((name == "config" || name == "intro") && !StoryOutliner.outline) {
+			$('.maincontainer .loaded-hidden').load('pages/' + name + '.html', onComplete);
+		} else {
+			$('.maincontainer .loaded-visible').load('pages/' + name + '.html', onComplete);
+		}
 	};
 
 	$('#dashboard').click(function() {
-		loadPage('dash');
+		if(StoryOutliner.outline) {
+			loadPage('dash');
+		} else {
+			loadPage('intro');
+		}
 	});
 
 	// Click handlers for the topbar
@@ -125,5 +133,5 @@ $(function() {
 	});
 	
 	// Load page
-	loadPage(localStorage.getItem('currentPage') || 'dash');
+	loadPage(localStorage.getItem('currentPage') || (StoryOutliner.outline ? 'dash' : 'intro'));
 });
